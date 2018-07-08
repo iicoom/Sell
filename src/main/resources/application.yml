@@ -1,8 +1,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: admin
+    # username: root
+    # password: admin
+    username: cloud
+    password: 02060934Mao,.
     # url: jdbc:mysql://192.168.0.113/sell?characterEncoding=urf-8&useSSL=false
     url: jdbc:mysql://127.0.0.1/sell?characterEncoding=utf-8&useSSL=false
   jpa:
@@ -10,7 +12,7 @@ spring:
 #server:
 #  context-path: /sell
 #logging:
-#  pattern:
+#  pattern: 
 #    console: "%d - %msg%n"
 #  file: /var/log/tomcat/sell.log
 #  level: debug
