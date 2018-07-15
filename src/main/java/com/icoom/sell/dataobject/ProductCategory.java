@@ -9,7 +9,7 @@ public class ProductCategory {
 
     // 类目id
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Integer categoryId;
 
     // 类目名字
