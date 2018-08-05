@@ -48,10 +48,13 @@ create table `order_detail` (
 	`order_id` varchar(32) not null,
 	`product_id` varchar(32) not null,
 	`product_name` varchar(64) not null comment '商品名称',
-	`product_price` decimal(8,2) not null comment '商品价格',
-	`product_quantity` int not null default current_timestamp comment '创建时间',
+	`product_price` decimal(8,2) not null comment '商品价格,单位分',
+	`product_quantity` int(11) not null comment '数量',
+	`product_icon` varchar(512) default null comment '小图',
+	`create_time` timestamp not null default current_timestamp comment '创建时间',
 	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
 	primary key (`detail_id`),
 	key `idx_order_id` (`order_id`),
+	constraint `order_detail_ibfk_1` foreign key (`order_id`) references `order_master` (`order_id`)
 ) comment '订单详情表';
 ```
