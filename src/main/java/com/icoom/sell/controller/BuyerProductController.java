@@ -76,8 +76,8 @@ public class BuyerProductController {
 //        resultVO.setMsg("成功");
 //
 //        return resultVO;
-        System.out.println("eeeeeeeeeeeeeeeeeeeee"+productInfoList);
-        System.out.println(productVOList);
+//        System.out.println("eeeeeeeeeeeeeeeeeeeee"+productInfoList);
+//        System.out.println(productVOList);
         return ResultVOUtil.success(productVOList);
     }
 }
