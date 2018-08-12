@@ -40,6 +40,14 @@ public class OrderDetail {
      */
     private String productIcon;
 
+    public String getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(String detailId) {
+        this.detailId = detailId;
+    }
+
     public String getOrderId() {
         return orderId;
     }
