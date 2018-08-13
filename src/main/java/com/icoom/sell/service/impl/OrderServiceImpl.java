@@ -3,6 +3,7 @@ package com.icoom.sell.service.impl;
 import com.icoom.sell.dataobject.OrderDetail;
 import com.icoom.sell.dataobject.OrderMaster;
 import com.icoom.sell.dataobject.ProductInfo;
+import com.icoom.sell.dto.CartDTO;
 import com.icoom.sell.dto.OrderDTO;
 import com.icoom.sell.enums.ResultEnum;
 import com.icoom.sell.exception.SellException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -65,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
         orderMasterRepository.save(orderMaster);
         
         // 4. 扣库存
+        List<CartDTO>
 
         return null;
     }
