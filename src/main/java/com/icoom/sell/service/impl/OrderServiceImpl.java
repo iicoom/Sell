@@ -17,10 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -35,10 +37,11 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterRepository orderMasterRepository;
 
     @Override
+    @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
 
         String orderId = KeyUtil.genUniqKey();
-        BigDecimal orderAmout = new BigDecimal(BigInteger.ZERO);
+        BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
 
         // 1. 查询商品（数量，价格）
         for (OrderDetail orderDetail: orderDTO.getOrderDetailList()) {
@@ -48,9 +51,9 @@ public class OrderServiceImpl implements OrderService {
             }
 
             // 2. 计算总价
-            orderAmout = orderDetail.getProductPrice()
+            orderAmount = orderDetail.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity()))
-                    .add(orderAmout);
+                    .add(orderAmount);
 
             // 订单详情入库
             orderDetail.setDetailId(KeyUtil.genUniqKey());
@@ -62,14 +65,17 @@ public class OrderServiceImpl implements OrderService {
         // 3. 写入订单数据库(orderMaster和orderDetail)
         OrderMaster orderMaster = new OrderMaster();
         orderMaster.setOrderId(orderId);
-        orderMaster.setOrderAmount(orderAmout);
+        orderMaster.setOrderAmount(orderAmount);
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMasterRepository.save(orderMaster);
         
         // 4. 扣库存
-        List<CartDTO>
+        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
+                new CartDTO(e.getProductId(), e.getProductQuantity())
+        ).collect(Collectors.toList());
+        productService.decreaseStock(cartDTOList);
 
-        return null;
+        return orderDTO;
     }
 
     @Override
