@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
             }
 
             // 2. 计算总价
-            orderAmount = orderDetail.getProductPrice()
+            orderAmount = productInfo.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity()))
                     .add(orderAmount);
 
@@ -64,9 +64,9 @@ public class OrderServiceImpl implements OrderService {
 
         // 3. 写入订单数据库(orderMaster和orderDetail)
         OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
-        BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMasterRepository.save(orderMaster);
         
         // 4. 扣库存

@@ -121,3 +121,23 @@ create table `order_detail` (
 	constraint `order_detail_ibfk_1` foreign key (`order_id`) references `order_master` (`order_id`)
 ) comment '订单详情表';
 ```
+
+// 但是测试的时候出现新的问题：保存的order_id超出了设定的范围
+// 所以调整OrderMaster order_id 字段如下
+```
+create table `order_master` (
+	`order_id` varchar(32) not null comment '订单id',
+	`buyer_name` varchar(32) not null comment '买家名字',
+	`buyer_phone` varchar(32) not null comment '买家电话',
+	`buyer_address` varchar(128) not null comment '买家地址',
+	`buyer_openid` varchar(64) not null comment '买家微信openid',
+	`order_amount` decimal(8,2) not null comment '订单总金额',
+	`order_status` tinyint(3) not null default '0' comment '订单状态，默认0新下单',
+	`pay_status` tinyint(3) not null default '0' comment '支付状态，默认0未支付',
+	`create_time` timestamp not null default current_timestamp comment '创建时间',
+	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
+	primary key (`order_id`),
+	key `idx_buyer_openid` (`buyer_openid`)
+) comment '订单表';
+
+```

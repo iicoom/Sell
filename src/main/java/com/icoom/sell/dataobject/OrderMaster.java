@@ -4,7 +4,6 @@ import com.icoom.sell.enums.OrderStatusEnum;
 import com.icoom.sell.enums.PayStatusEnum;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,7 +15,6 @@ public class OrderMaster {
      * 订单ID
      */
     @Id
-    @GeneratedValue()
     private String orderId;
 
     /**
