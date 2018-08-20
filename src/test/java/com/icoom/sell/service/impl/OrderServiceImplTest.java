@@ -22,6 +22,7 @@ public class OrderServiceImplTest {
     private OrderServiceImpl orderService;
 
     private final String BUYER_OPENID = "1101110";
+    private final String ORDER_ID = "123456";
 
     @Test
     public void create() {
@@ -54,7 +55,10 @@ public class OrderServiceImplTest {
     }
 
     @Test
-    public void findOne() {
+    public void findOne() throws Exception {
+        OrderDTO result = orderService.findOne(ORDER_ID);
+        log.info("【查询单个订单】 result={}", result);
+        Assert.assertEquals(ORDER_ID, result.getOrderId());
     }
 
     @Test
