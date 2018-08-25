@@ -2,12 +2,15 @@ package com.icoom.sell.service.impl;
 
 import com.icoom.sell.dataobject.OrderDetail;
 import com.icoom.sell.dto.OrderDTO;
+import com.icoom.sell.enums.OrderStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class OrderServiceImplTest {
     private OrderServiceImpl orderService;
 
     private final String BUYER_OPENID = "1101110";
-    private final String ORDER_ID = "123456";
+    private final String ORDER_ID = "1534677480357378818";
 
     @Test
     public void create() {
@@ -62,11 +65,17 @@ public class OrderServiceImplTest {
     }
 
     @Test
-    public void findList() {
+    public void findList() throws Exception {
+        PageRequest request = new PageRequest(0,2);
+        Page<OrderDTO> orderDTOPage = orderService.findList(BUYER_OPENID, request);
+        Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
     }
 
     @Test
-    public void cancel() {
+    public void cancel() throws Exception {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 
     @Test
