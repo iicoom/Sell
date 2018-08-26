@@ -70,8 +70,11 @@ public class BuyerOrderController {
         PageRequest request = new PageRequest(page, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, request);
 
-        return ResultVOUtil.success(orderDTOPage.getContent());
+//        return ResultVOUtil.success(orderDTOPage.getContent());
 //        return ResultVOUtil.success();
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(0);
+        return resultVO;
     }
 
     // 订单详情

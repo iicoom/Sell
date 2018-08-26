@@ -8,6 +8,7 @@ import com.icoom.sell.enums.PayStatusEnum;
 import com.icoom.sell.utils.serializer.Date2LongSerializer;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,7 +68,8 @@ public class OrderDTO {
     @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
-    List<OrderDetail> orderDetailList;
+    // 赋初始值
+    List<OrderDetail> orderDetailList = new ArrayList<>();
 
     public String getOrderId() {
         return orderId;
