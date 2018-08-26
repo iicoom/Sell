@@ -1,5 +1,6 @@
 package com.icoom.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.icoom.sell.dataobject.OrderDetail;
 import com.icoom.sell.enums.OrderStatusEnum;
@@ -10,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /**
