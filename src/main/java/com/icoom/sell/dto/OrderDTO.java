@@ -1,8 +1,11 @@
 package com.icoom.sell.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.icoom.sell.dataobject.OrderDetail;
 import com.icoom.sell.enums.OrderStatusEnum;
 import com.icoom.sell.enums.PayStatusEnum;
+import com.icoom.sell.utils.serializer.Date2LongSerializer;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -52,11 +55,13 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
