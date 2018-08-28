@@ -6,6 +6,7 @@ import com.icoom.sell.dto.OrderDTO;
 import com.icoom.sell.enums.ResultEnum;
 import com.icoom.sell.exception.SellException;
 import com.icoom.sell.form.OrderForm;
+import com.icoom.sell.service.BuyerService;
 import com.icoom.sell.service.OrderService;
 import com.icoom.sell.utils.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,9 @@ public class BuyerOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BuyerService buyerService;
 
     // 创建订单
     @PostMapping("/create")
@@ -78,7 +82,7 @@ public class BuyerOrderController {
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId) {
         // TODO 不安全的做法，改进
-        OrderDTO orderDTO = orderService.findOne(orderId);
+        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
 
@@ -87,8 +91,8 @@ public class BuyerOrderController {
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
         // TODO 不安全的做法，改进
-        OrderDTO orderDTO = orderService.findOne(orderId);
-        orderService.cancel(orderDTO);
+        buyerService.cancelOrder(openid, orderId);
+        // orderService.cancel(orderDTO);
 
         return ResultVOUtil.success();
     }
