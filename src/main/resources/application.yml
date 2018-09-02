@@ -16,3 +16,7 @@ server:
 #    console: "%d - %msg%n"
 #  file: /var/log/tomcat/sell.log
 #  level: debug
+
+wechat:
+  myAppId:
+  myAppSecret:
