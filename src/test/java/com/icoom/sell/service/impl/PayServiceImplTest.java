@@ -1,6 +1,7 @@
 package com.icoom.sell.service.impl;
 
 import com.icoom.sell.dto.OrderDTO;
+import com.icoom.sell.service.OrderService;
 import com.icoom.sell.service.PayService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +21,13 @@ public class PayServiceImplTest {
     @Autowired
     private PayService payService;
 
+    @Autowired
+    private OrderService orderService;
+
     @Test
     public void create() throws Exception {
-        OrderDTO orderDTO = new OrderDTO();
+//        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO = orderService.findOne("12345556");
         payService.create(orderDTO);
     }
 }
