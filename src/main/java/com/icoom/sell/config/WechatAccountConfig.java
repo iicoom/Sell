@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "wechat")
+@ConfigurationProperties(prefix = "wechat") // 可以拿到application.yml 中weixin配置
 public class WechatAccountConfig {
 
     private String mpAppId;
