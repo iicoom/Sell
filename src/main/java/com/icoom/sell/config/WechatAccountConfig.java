@@ -31,5 +31,8 @@ public class WechatAccountConfig {
      */
     private String keyPath;
 
-
+    /**
+     * 微信异步通知地址
+     */
+    private String notifyUrl;
 }
