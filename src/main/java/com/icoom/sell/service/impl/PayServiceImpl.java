@@ -10,6 +10,8 @@ import com.icoom.sell.utils.MathUtil;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +87,18 @@ public class PayServiceImpl implements PayService {
         // 修改订单的支付状态
         orderService.paid(orderDTO);
         return payResponse;
+    }
+
+    @Override
+    public RefundResponse refund(OrderDTO orderDTO) {
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setOrderId(orderDTO.getOrderId());
+        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        log.info("【微信退款】request={} ", JsonUtil.toJson(refundRequest));
+
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+        log.info("【微信退款】response={} ", JsonUtil.toJson(refundResponse));
+        return refundResponse;
     }
 }

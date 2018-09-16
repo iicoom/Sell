@@ -13,6 +13,7 @@ import com.icoom.sell.exception.SellException;
 import com.icoom.sell.repository.OrderDetailRepository;
 import com.icoom.sell.repository.OrderMasterRepository;
 import com.icoom.sell.service.OrderService;
+import com.icoom.sell.service.PayService;
 import com.icoom.sell.service.ProductService;
 import com.icoom.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional
@@ -149,7 +153,8 @@ public class OrderServiceImpl implements OrderService {
 
         // 如果已支付需要退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            // TODO
+            // TODO 已完成
+            payService.refund(orderDTO);
         }
 
         return orderDTO;

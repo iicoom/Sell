@@ -30,4 +30,10 @@ public class PayServiceImplTest {
         OrderDTO orderDTO = orderService.findOne("1535259682782611164");
         payService.create(orderDTO);
     }
+
+    @Test
+    public void refund() {
+        OrderDTO orderDTO = orderService.findOne("1535259682782611164");
+        payService.refund(orderDTO);
+    }
 }
