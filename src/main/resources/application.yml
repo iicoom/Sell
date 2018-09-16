@@ -18,8 +18,8 @@ server:
 #  level: debug
 
 wechat:
-  mpAppId: wx35548ff0c793bc98
-  mpAppSecret: 0b0e59db80aedcab7dea2e3e07601d59
+  mpAppId: wx4d2b79e558009896
+  mpAppSecret: acd40ce586f5e35953690e6e27f48d91
   mchId: 1357981202
   mchKey: 8c4ae3d4e6dbf2de22fd14396a616816
   keyPath:
